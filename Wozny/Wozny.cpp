@@ -64,3 +64,9 @@ int main()
 
     std::cout << std::setw(15) << " " << "\nDO WIDZENIA PANIE WOZNY!\n";
 }
+
+
+//That's just a check to see if commits work properly
+//Ignore my dumb ass
+
+//Ps. this still looks like shit and is unbearably long but hopefully wil work fine
