@@ -1,2 +1,2 @@
 # Wozny
-Work in progress
+Woźny (nie)płaci, woźny wymaga
