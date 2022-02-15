@@ -139,10 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Iohandler.cpp" />
+    <ClCompile Include="Notepad.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="Wozny.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Iohandler.h" />
+    <ClInclude Include="Notepad.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

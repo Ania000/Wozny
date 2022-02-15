@@ -18,10 +18,11 @@ public:
 
 	inline std::string get_name() { return name; }
 
-	void display();
+	void display() const;
 
 	void add_task(std::string task);
-	void erase_task();
+	void erase_task(int num);
+	inline int get_num_tasks() { return tasks.size(); }
 
 
 };
