@@ -4,21 +4,23 @@ Room::Room() {}
 Room::Room(std::string n) : name(n) {}
 
 
-void Room::display()
+void Room::display() const
 {
-	std::cout << name << ": \n";
-	for (auto t : tasks)
+	std::cout <<"\t"<< name << ": \n";
+	for (int i{0}; i < tasks.size(); i ++)
 	{
-		std::cout << "\t> " << t << std::endl;
+		
+		std::cout << "\t\t"<<i+1<<" > " << tasks.at(i) << std::endl;
 	}
 }
 
 void Room::add_task(std::string task)
 {
-	tasks.push_back(task);
+	tasks.emplace_back(task);
 }
 
-void Room::erase_task()
+void Room::erase_task(int num)
 {
-
+	tasks.erase(tasks.begin() + num);
+	std::cout << "Pomyslnie usunieto zadanie.\n";
 }

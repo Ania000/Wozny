@@ -21,9 +21,21 @@
     <ClCompile Include="Room.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Notepad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Iohandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Room.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Notepad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Iohandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
