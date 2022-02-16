@@ -1,22 +1,21 @@
 #include "Notepad.h"
 
 Notepad::Notepad() {}
-Notepad::Notepad(std::vector<std::string>& temp) 
+void Notepad::add_rooms(std::vector<std::string> &temp) 
 {
     for (std::string t : temp)
     {
         rooms.emplace_back(t);
     }
-    names = temp;
 
-    temp.~vector();
+    temp.clear();
 }
 
 void Notepad::display()
 {
-    std::cout << std::setw(5) << " " << std::setw(40) << std::setfill('-') << " " << std::setfill(' ') << "\n";
-    std::cout << "     " << std::setw(13)<<" " << " Spis Zadan " << "\n";
-    std::cout << std::setfill('-') << "     " << std::setw(40) << " " << std::setfill(' ') << "\n\n";
+    std::cout << "     -------------------------------------------------------------------\n";
+    std::cout << "                                  Spis Zadan " << "\n";
+    std::cout << "     -------------------------------------------------------------------\n\n";
     for (const Room &r : rooms)
     {
         r.display();
@@ -27,7 +26,7 @@ void Notepad::display()
 void Notepad::add_task_to_room()
 {
     int room_num;
-    std::string msg{ "Podaj numer pomieszczenia, do ktorego chcesz dodac zadanie: " };
+    std::string msg{ "\n\tPodaj numer pomieszczenia, do ktorego chcesz dodac zadanie: " };
     
     display_names();
     validate(room_num, msg);
@@ -39,13 +38,19 @@ void Notepad::add_task_to_room()
 std::string Notepad::get_task(int num)
 {
     std::string task;
-    std::cout << "Podaj zadanie, ktore chcesz dodac do pokoju [" << rooms.at(num).get_name() << "]:\n";
-    do
+    std::cout << "\n\tPodaj zadanie, ktore chcesz dodac do pokoju [" << rooms.at(num).get_name() << "]:\n";
+    while (true)     //otherwise user prompted till passes in a valid task
     {
         getline(std::cin, task);
-        if (task.length() != 0) return task;        //if string not empty, it's returned as task
-        std::cout << "Nie wpisano zadania, podaj jeszcze raz:\n";
-    } while (true);     //otherwise user prompted till passes in a valid task
+        if (task.length() != 0) {
+            for (char t : task)
+            {
+                if (t != ' ') return task;
+            }
+        }
+
+        std::cout << "\tNie wpisano zadania, podaj jeszcze raz:\n";
+    } 
 }
 
 void Notepad:: del_from_room()
@@ -55,21 +60,21 @@ void Notepad:: del_from_room()
     int room_num;
     bool doopy = true;
 
-    std::string msg{ "Podaj numer pomieszczenia, z ktorego chcesz usunac zadanie: " };
+    std::string msg{ "\n\tPodaj numer pomieszczenia, z ktorego chcesz usunac zadanie: " };
 
     display_names();
     validate(room_num, msg);
 
     if (rooms.at(room_num).get_num_tasks() == 0)
     {
-        std::cout << "Nie ma zadan w tym pomieszczeniu!\n";
+        std::cout << "\n\tNie ma zadan w tym pomieszczeniu!\n";
         return;
     }
 
-    std::cout << "Zadania w tym pomieszczeniu: \n";
+    std::cout << "\n\tZadania w tym pomieszczeniu: \n";
     rooms.at(room_num).display();
 
-    std::cout << "Podaj, ktore zadanie chcesz usunac: ";
+    std::cout << "\n\tPodaj, ktore zadanie chcesz usunac: ";
 
     while (doopy) {
         getline(std::cin, num);
@@ -83,7 +88,7 @@ void Notepad:: del_from_room()
             }
 
         }
-        std::cout << "Nie istnieje zadanie o takim numerze, podaj ponownie: ";
+        std::cout << "\tNie istnieje zadanie o takim numerze, podaj ponownie: ";
     }
 
     task_num--;     //decrease so that the number corresponds to location in vector
@@ -108,14 +113,24 @@ void Notepad::validate(int &room_num, std::string msg)      //makes sure the use
             }
 
         }
-        std::cout << "Takie pomieszczenie nie istnieje, sporobuj jeszcze raz: ";
+        std::cout << "\tTakie pomieszczenie nie istnieje, sporobuj jeszcze raz: ";
     }
     room_num--;
 }
 
 void Notepad::display_names()
 {
-    std::cout << "[ ";
-    for (auto n : names) std::cout << n<<" ";
-    std::cout << "]\n";
+    std::cout << "     -------------------------------------------------------------------\n";
+    std::cout << "                                Pomieszczenia " << "\n";
+    std::cout << "     -------------------------------------------------------------------\n\n";
+    for (auto r : rooms)
+    {
+        //making sure that all number counts are lined up despite differing name lengths
+        std::cout << "\t" << r.get_name();
+        if (r.get_name().at(0) == '1' && r.get_name().at(1) != '0')std::cout << "\t\t";     //first room needs one more indentation then the rest
+        else if (r.get_name().at(0) == '8')std::cout << "";     //eight needs one less
+        else std::cout << "\t";                                 //rest of the rooms just get a generic one
+        std::cout<<"\t\t[zadan:" << r.get_num_tasks() << "]" << "\n";
+    }
+    std::cout << "\n";
 }
