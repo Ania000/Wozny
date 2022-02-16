@@ -17,10 +17,11 @@ void Room::display() const
 void Room::add_task(std::string task)
 {
 	tasks.emplace_back(task);
+	std::cout << "\n\tPomyslnie dodano zadanie!\n";
 }
 
 void Room::erase_task(int num)
 {
 	tasks.erase(tasks.begin() + num);
-	std::cout << "Pomyslnie usunieto zadanie.\n";
+	std::cout << "\n\tPomyslnie usunieto zadanie.\n";
 }

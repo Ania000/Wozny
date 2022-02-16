@@ -1,8 +1,5 @@
 #pragma once
 
-//#include <iostream>
-//#include <vector>
-//#include <string>
 #include <sstream>
 #include <iomanip>
 #include "Room.h"
@@ -11,7 +8,6 @@ class Notepad
 {
 private:
 
-	std::vector<std::string> names;
 	std::vector<Room> rooms;
 
 	std::string get_task(int num);
@@ -22,11 +18,12 @@ private:
 public:
 
 	Notepad();
-	Notepad(std::vector<std::string> &temp);
 
 	void display();
 	void add_task_to_room();
 	void del_from_room();
+	void add_rooms(std::vector<std::string>& temp);
+
 
 	
 

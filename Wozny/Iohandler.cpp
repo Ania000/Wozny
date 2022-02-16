@@ -7,11 +7,13 @@ int Iohandler::prompt()
 
     menu();
 
+    //here, I actually need do while(), so that first, the input is taken from the user, and then check() is called on that input
+    //while loop causes validation to happen before taking the value
     do
     {
         getline(std::cin, choice);     // we read into a char
 
-    } while (!check(choice, c));     //break out of the loop once choice is valid
+    } while (!check(choice, c));     //break out of the loop once choice is valid   
 
     system("cls");
     return c;      //return int
@@ -19,9 +21,10 @@ int Iohandler::prompt()
 
 void Iohandler::menu()
 {
-    std::cout <<std::setw(5)<<" " << std::setw(40) << std::setfill('-') << " "<<std::setfill(' ')<<"\n";
-    std::cout << "     " <<std::setw(21)<< " MENU " << "\n";
-    std::cout << std::setfill('-') << "     " << std::setw(40) << " " << std::setfill(' ') << "\n\n";
+    set_color('w');
+    std::cout << "     -------------------------------------------------------------------\n";
+    std::cout <<"                                    MENU\n";
+    std::cout << "     -------------------------------------------------------------------\n\n";
     std::cout<< "     1. Wyswietl zadania\n"
         << "     2. Dodaj nowe zadanie\n"
         << "     3. Usun wykonane zadanie\n"
@@ -39,7 +42,29 @@ bool Iohandler::check(std::string choice, int& c)
         if (c >= 1 && c <= 4) return true;
     }
 
-    std::cout << "Taki wybor nie istnieje!\nSproboj jeszcze raz: ";
+    std::cout << "\tTaki wybor nie istnieje!\nSproboj jeszcze raz: ";
     return false;
 
+}
+
+void Iohandler::set_color(char c)
+{
+
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    switch (c)
+    {
+    case 'g':
+        SetConsoleTextAttribute(handle, 2);
+        break;
+    case 'b':
+        SetConsoleTextAttribute(handle, 3);
+        break;
+    case 'r':
+        SetConsoleTextAttribute(handle, 4);
+        break;
+    case 'w':
+    default:
+        SetConsoleTextAttribute(handle, 7);
+    }
+    
 }
