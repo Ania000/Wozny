@@ -10,15 +10,17 @@ class Room
 {
 private:
 	std::string name;
+	int num;
 	std::vector<std::string> tasks;
 
 public:
 	Room();
-	Room(std::string n);
+	Room(std::string s, int n);
 
 	inline std::string get_name() { return name; }
 
 	void display() const;
+	void show_overview();
 
 	void add_task(std::string task);
 	void erase_task(int num);

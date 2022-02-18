@@ -10,7 +10,7 @@ private:
 
 	std::vector<Room> rooms;
 
-	std::string get_task(int num);
+	std::string task_from_usr(int num);
 	void validate(int& room_num, std::string msg);
 	void display_names();
 	
