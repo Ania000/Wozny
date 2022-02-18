@@ -3,12 +3,12 @@
 Notepad::Notepad() {}
 void Notepad::add_rooms(std::vector<std::string> &temp) 
 {
+    int n = 1;
     for (std::string t : temp)
     {
-        rooms.emplace_back(t);
+        rooms.emplace_back(t, n);      //adding a new Room to vector and thus calling Room() with string and int
+        n++;
     }
-
-    temp.clear();
 }
 
 void Notepad::display()
@@ -31,11 +31,11 @@ void Notepad::add_task_to_room()
     display_names();
     validate(room_num, msg);
 
-    std::string task = get_task(room_num);
+    std::string task = task_from_usr(room_num);
     rooms.at(room_num).add_task(task);
 }
 
-std::string Notepad::get_task(int num)
+std::string Notepad::task_from_usr(int num)
 {
     std::string task;
     std::cout << "\n\tPodaj zadanie, ktore chcesz dodac do pokoju [" << rooms.at(num).get_name() << "]:\n";
@@ -125,12 +125,7 @@ void Notepad::display_names()
     std::cout << "     -------------------------------------------------------------------\n\n";
     for (auto r : rooms)
     {
-        //making sure that all number counts are lined up despite differing name lengths
-        std::cout << "\t" << r.get_name();
-        if (r.get_name().at(0) == '1' && r.get_name().at(1) != '0')std::cout << "\t\t";     //first room needs one more indentation then the rest
-        else if (r.get_name().at(0) == '8')std::cout << "";     //eight needs one less
-        else std::cout << "\t";                                 //rest of the rooms just get a generic one
-        std::cout<<"\t\t[zadan:" << r.get_num_tasks() << "]" << "\n";
+        r.show_overview();
     }
     std::cout << "\n";
 }
