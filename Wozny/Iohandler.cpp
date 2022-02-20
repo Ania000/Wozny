@@ -25,24 +25,25 @@ void Iohandler::menu()
     std::cout << "     -------------------------------------------------------------------\n";
     std::cout <<"                                    MENU\n";
     std::cout << "     -------------------------------------------------------------------\n\n";
-    std::cout<< "     1. Wyswietl zadania\n"
-        << "     2. Dodaj nowe zadanie\n"
-        << "     3. Usun wykonane zadanie\n"
-        << "     4. Zakoncz\n\n"
-        << "\tTwoj wybor: ";
+    std::cout<< "     1. Display tasks\n"
+        << "     2. Add a new task\n"
+        << "     3. Delete a task\n"
+        << "     4. Add a location\n"
+        << "     5. Delete a location\n"
+        << "     6. Quit(t)\n\n"
+        << "\tChoice: ";
 }
 
 bool Iohandler::check(std::string choice, int& c)
 {
     std::istringstream ss{ choice };
     ss >> c;
-    //c -= 48;            //get the right int value accoring to ASCII
     if (c) //if failed, skip
     {
-        if (c >= 1 && c <= 4) return true;
+        if (c >= 1 && c <= 6) return true;
     }
 
-    std::cout << "\tTaki wybor nie istnieje!\nSproboj jeszcze raz: ";
+    std::cout << "\tNo such option!\n\tEnter again: ";
     return false;
 
 }

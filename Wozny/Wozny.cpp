@@ -9,11 +9,17 @@
 #include "Room.h"
 #include "Iohandler.h"
 
+void prompt()
+{
+    std::string ready;
+    std::cout << "Press ENTER to return to MENU.";
+    getline(std::cin, ready);
+}
+
 void main_loop(Notepad &notepad)
 {
     Iohandler handler;
-    std::string ready;
-    std::cout<<std::endl << "                         DZIEN DOBRY PANIE WOZNY!\n\n";
+    std::cout<<std::endl << "                               HELLO THERE!\n\n";
     while (true)
     {
         switch (handler.prompt())
@@ -21,26 +27,34 @@ void main_loop(Notepad &notepad)
         case 1:
             handler.set_color('b');
             notepad.display();
-            std::cout << "Kliknij enter aby wrocic do menu.";
-            getline(std::cin, ready);
+            prompt();
             break;
 
         case 2:
             handler.set_color('g');
             notepad.add_task_to_room();
-            std::cout << "\nKliknij enter aby wrocic do menu.";
-            getline(std::cin, ready);
-
+            prompt();
             break;
 
         case 3:
             handler.set_color('r');
             notepad.del_from_room();
-            std::cout << "\nKliknij enter aby wrocic do menu.";
-            getline(std::cin, ready);
+            prompt();
             break;
 
         case 4:
+            handler.set_color('g');
+            notepad.add_room();
+            prompt();
+            break;
+
+        case 5:
+            handler.set_color('r');
+            notepad.del_room();
+            prompt();
+            break;
+
+        case 6:
 
         default:
             return;
@@ -52,14 +66,13 @@ void main_loop(Notepad &notepad)
 
 
 int main()
-{
-    std::vector<std::string> temp{ "Lobby", "Biuro_1", "Biuro_2", "Serwerownia_1", "Serwerownia_2", "Kuchnia", "Lazienka", "Sala Konferencyjna", "Magazyn",  "Kanciapa" };
-    
-    Notepad notepad;    //create a notepad with rooms listed in vector
-    notepad.add_rooms(temp);
-    main_loop(notepad);
+{   
+    Notepad notepad;   
 
-    std::cout << "\n                       DO WIDZENIA PANIE WOZNY!\n";
+    notepad.read_file();
+    main_loop(notepad);
+    notepad.save_file();
+    std::cout << "\n                       SEE YA LATER!\n";
 }
 
 
