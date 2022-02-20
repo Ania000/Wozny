@@ -1,7 +1,11 @@
 #pragma once
 
+//rooms to be interpreted as locations
+//Room: Location
+
 #include <sstream>
 #include <iomanip>
+#include <fstream>
 #include "Room.h"
 
 class Notepad
@@ -22,8 +26,11 @@ public:
 	void display();
 	void add_task_to_room();
 	void del_from_room();
-	void add_rooms(std::vector<std::string>& temp);
+	void add_room();
+	void del_room();
 
+	void read_file();
+	void save_file() const;
 
 	
 
