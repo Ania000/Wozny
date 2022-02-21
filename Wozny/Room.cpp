@@ -14,10 +14,10 @@ void Room::display() const
 	}
 }
 
-void Room::show_overview()
+void Room::show_overview() const
 {
 	std::cout <<name;
-	std::cout << "\t\t[no. tasks:" << tasks.size() << "]" << "\n";
+	std::cout << "\t\t[no. tasks:" << tasks.size() << "]";
 }
 
 void Room::add_task(std::string task)
@@ -30,9 +30,4 @@ void Room::erase_task(int num)
 {
 	tasks.erase(tasks.begin() + num);
 	std::cout << "\n\tTask deleted successfully.\n";
-}
-
-std::vector<std::string> Room::get_tasks() const
-{
-	return tasks;
 }
