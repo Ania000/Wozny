@@ -1,6 +1,7 @@
 #include "Notepad.h"
 
 Notepad::Notepad() {}
+
 void Notepad::add_room() 
 {
     std::string name;
@@ -13,13 +14,32 @@ void Notepad::add_room()
         if (name.length() != 0) {
             for (char n : name)
             {
-                if (n != ' ') doopy = false;
-            }
-            
+                if (n != ' ' && n!= '\t')
+                {
+                    doopy = false;
+                    break;
+                }
+            }   
         }
-
         if (doopy)std::cout << "\tLocation not entered, try again:\n";
     }
+
+    while (name.at(0) == ' ' || name.at(0) == '\t')     //erasing empty spaces at the beginning of words
+    {
+        name.erase(0, 1);
+    }
+
+    for (int i{}; i < rooms.size(); i++)
+    {
+        if (rooms.at(i).get_name() == name)
+        {
+            std::cout << "\n\tSuch location already exists. [ " << i + 1 << ". "; 
+            rooms.at(i).show_overview();
+            std::cout<< " ]\n";
+            return;
+        }
+    }
+
     rooms.push_back(Room(name));
     std::cout << "\n\tLocation added successfully!\n\n";
        
@@ -42,7 +62,7 @@ void Notepad::del_room()
     std::cout << "\n\tLocation deleted successfully!\n\n";
 }
 
-void Notepad::display()
+void Notepad::display() const
 {
     if (rooms.empty())
     {
@@ -75,8 +95,26 @@ void Notepad::add_task_to_room()
     validate(room_num, msg);
 
     std::string task = task_from_usr(room_num);
+
+    while (task.at(0) == ' ' || task.at(0) == '\t')     //erasing empty spaces at the beginning of words
+    {
+        task.erase(0, 1);
+    }
+
+    const std::vector<std::string> *tasks = rooms.at(room_num).get_tasks();    //get a pointer to a vector of tasks
+    for (const std::string &t : *tasks)
+    {
+        if (t == task)      //if task already exists, don't save it again
+        {
+            std::cout << "\n\tSuch task already exists in this location.\n ";
+            tasks = nullptr;
+            return;
+        }
+    }
+
     rooms.at(room_num).add_task(task);
     std::cout << "\n\tTask added successfully!\n";
+    
 }
 
 std::string Notepad::task_from_usr(int num)
@@ -89,10 +127,9 @@ std::string Notepad::task_from_usr(int num)
         if (task.length() != 0) {
             for (char t : task)
             {
-                if (t != ' ') return task;
+                if (t != ' ' && t != '\t') return task;
             }
         }
-
         std::cout << "\tNo task entered, try again:\n";
     } 
 }
@@ -108,7 +145,6 @@ void Notepad:: del_from_room()
     std::string num;
     int task_num;
     int room_num;
-    bool doopy = true;
 
     std::string msg{ "\n\tEnter the location from which to delete a task: " };
 
@@ -125,18 +161,15 @@ void Notepad:: del_from_room()
     rooms.at(room_num).display();
 
     std::cout << "\n\tEnter the task to delete: ";
-
-    while (doopy) {
+    while (true) {
         getline(std::cin, num);
         std::istringstream ss{ num };
         if (ss >> task_num)
         {
             if (task_num >= 1 && task_num <= rooms.at(room_num).get_num_tasks())
             {
-                doopy = false;
                 break;
             }
-
         }
         std::cout << "\tNo task with such number, enter again: ";
     }
@@ -168,7 +201,7 @@ void Notepad::validate(int &room_num, std::string msg)      //makes sure the use
     room_num--;     //decreases the number by one in order to adjust it to vector indexes
 }
 
-void Notepad::display_names()
+void Notepad::display_names() const
 {
     std::cout << "     -------------------------------------------------------------------\n";
     std::cout << "                                Locations \n";
@@ -177,6 +210,7 @@ void Notepad::display_names()
     {
         std::cout << "\t" << i + 1 << ". ";
         rooms.at(i).show_overview();
+        std::cout << std::endl;
     }
     std::cout << "\n";
 }
@@ -219,8 +253,8 @@ void Notepad::save_file() const
     for (const Room &r : rooms)
     {
         ofile << r.get_name() << std::endl;
-        std::vector<std::string> tasks{ r.get_tasks() };
-        for (const std::string &t : tasks)
+        const std::vector<std::string> *tasks = r.get_tasks();
+        for (const std::string &t : *tasks)
         {
             ofile << t << std::endl;
         }

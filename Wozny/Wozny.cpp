@@ -9,17 +9,19 @@
 #include "Room.h"
 #include "Iohandler.h"
 
-void prompt()
+
+void save_n_prompt(Notepad &n)
 {
+    n.save_file();
     std::string ready;
     std::cout << "Press ENTER to return to MENU.";
     getline(std::cin, ready);
 }
 
+
 void main_loop(Notepad &notepad)
 {
     Iohandler handler;
-    std::cout<<std::endl << "                               HELLO THERE!\n\n";
     while (true)
     {
         switch (handler.prompt())
@@ -27,31 +29,31 @@ void main_loop(Notepad &notepad)
         case 1:
             handler.set_color('b');
             notepad.display();
-            prompt();
+            save_n_prompt(notepad);
             break;
 
         case 2:
             handler.set_color('g');
             notepad.add_task_to_room();
-            prompt();
+            save_n_prompt(notepad);
             break;
 
         case 3:
             handler.set_color('r');
             notepad.del_from_room();
-            prompt();
+            save_n_prompt(notepad);
             break;
 
         case 4:
             handler.set_color('g');
             notepad.add_room();
-            prompt();
+            save_n_prompt(notepad);
             break;
 
         case 5:
             handler.set_color('r');
             notepad.del_room();
-            prompt();
+            save_n_prompt(notepad);
             break;
 
         case 6:
@@ -67,16 +69,19 @@ void main_loop(Notepad &notepad)
 
 int main()
 {   
-    Notepad notepad;   
+    Notepad notepad;
 
+    std::cout << std::endl << "                      HELLO THERE! (general Kenobi)\n\n";
     notepad.read_file();
     main_loop(notepad);
-    notepad.save_file();
-    std::cout << "\n                       SEE YA LATER!\n";
+    std::cout << "\n                         SEE YA LATER!\n";
 }
 
 
-//That's just a check to see if commits work properly
-//Ignore my dumb ass
 
-//Ps. this still looks like shit and is unbearably long but hopefully wil work fine
+//Ps. this still looks like shit and is unbearably long but hopefully will work fine
+
+//Pps. How the hell yall's code is so short, wtf, i really don't see how to make it more efficient and less complex???
+// i mean i guess i could pack some stuff in notepad.cpp into functions, but then those functions would be pretty complex cuz they would need slightly different arguments every time
+// so how... what am I doing wrong
+//   `\_(*-*)_/`
