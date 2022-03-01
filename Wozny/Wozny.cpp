@@ -57,6 +57,18 @@ void main_loop(Notepad &notepad)
             break;
 
         case 6:
+            handler.set_color('g');
+            notepad.add_contractor();
+            save_n_prompt(notepad);
+            break;
+
+        case 7:
+            handler.set_color('r');
+            notepad.del_contractor();
+            save_n_prompt(notepad);
+            break;
+
+        case 8:
 
         default:
             return;

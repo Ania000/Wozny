@@ -13,12 +13,15 @@ class Notepad
 private:
 
 	std::vector<Room> rooms;
+	std::vector<std::string> contractors;
 
 	std::string task_from_usr(int num);
 	void validate(int& room_num, std::string msg);
 	void display_names() const;
-	
 
+	void display_contractors();
+	void validate_cont(int& cont_id);
+	void reassign_conts(std::string temp);
 public:
 
 	Notepad();
@@ -29,10 +32,13 @@ public:
 	void add_room();
 	void del_room();
 
+	void add_contractor();
+	void del_contractor();
+	
+
 	void read_file();
 	void save_file() const;
 
-	
+
 
 };
-
