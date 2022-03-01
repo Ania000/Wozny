@@ -30,7 +30,9 @@ void Iohandler::menu()
         << "     3. Delete a task\n"
         << "     4. Add a location\n"
         << "     5. Delete a location\n"
-        << "     6. Quit(t)\n\n"
+        << "     6. Add a contractor\n"
+        << "     7. Delete a contractor\n"
+        << "     8. Quit(t)\n\n"
         << "\tChoice: ";
 }
 
@@ -40,7 +42,7 @@ bool Iohandler::check(std::string choice, int& c)
     ss >> c;
     if (c) //if failed, skip
     {
-        if (c >= 1 && c <= 6) return true;
+        if (c >= 1 && c <= 8) return true;
     }
 
     std::cout << "\tNo such option!\n\tEnter again: ";
