@@ -222,7 +222,7 @@ void Notepad::del_contractor()
 
     display_contractors();
     std::cout << "\n\t\t" << contractors.size() + 1 << ". Back\n\n";
-    std::cout << "Enter a contractor to delete: ";
+    std::cout << "\tEnter a contractor to delete: ";
 
     int cont_id;
     validate_cont(cont_id);
@@ -291,7 +291,8 @@ void Notepad::change_cont()
     int task_num;
     int room_num;
 
-    select_task(msg1, msg2, msg3, task_num, room_num);
+
+    if (!select_task(msg1, msg2, msg3, task_num, room_num)) return;
 
     Room& r = rooms.at(room_num);
 
@@ -495,12 +496,12 @@ std::string Notepad::task_from_usr(int num)
 
 }
 
-void Notepad::select_task(std::string msg1, std::string msg2, std::string msg3, int &task_num, int &room_num)
+bool Notepad::select_task(std::string msg1, std::string msg2, std::string msg3, int &task_num, int &room_num)
 {
     if (rooms.empty())
     {
         std::cout << msg1;
-        return;
+        return false;
     }
 
     std::string num;
@@ -511,12 +512,12 @@ void Notepad::select_task(std::string msg1, std::string msg2, std::string msg3, 
     display_names();
     std::cout << "\t" << rooms.size() + 1 << ". Back\n";
     validate(room_num, msg);
-    if (room_num == rooms.size()) return;
+    if (room_num == rooms.size()) return false;
 
     if (rooms.at(room_num).get_num_tasks() == 0)
     {
         std::cout << "\n\tNo tasks in this location!\n";
-        return;
+        return false;
     }
 
     std::cout << "\n\tTasks in this location: \n";
@@ -537,6 +538,7 @@ void Notepad::select_task(std::string msg1, std::string msg2, std::string msg3, 
     }
 
     task_num--;     //decrease so that the number corresponds to location in vector
+    return true;
 }
 
 void Notepad::get_opinion(Task& t)

@@ -25,7 +25,7 @@ private:
 	std::string get_text(std::string thing);
 	float get_rating();
 	std::string task_from_usr(int num);
-	void select_task(std::string msg1, std::string msg2, std::string msg3, int& task_num, int& room_num);
+	bool select_task(std::string msg1, std::string msg2, std::string msg3, int& task_num, int& room_num);
 
 	//Validation
 	void validate(int& room_num, std::string msg);
