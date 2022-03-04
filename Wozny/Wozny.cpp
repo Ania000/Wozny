@@ -33,42 +33,60 @@ void main_loop(Notepad &notepad)
             break;
 
         case 2:
+            handler.set_color('b');
+            notepad.display_closed();
+            save_n_prompt(notepad);
+            break;
+
+        case 3:
             handler.set_color('g');
             notepad.add_task_to_room();
             save_n_prompt(notepad);
             break;
 
-        case 3:
+        case 4:
             handler.set_color('r');
             notepad.del_from_room();
             save_n_prompt(notepad);
             break;
 
-        case 4:
+        case 5:
             handler.set_color('g');
             notepad.add_room();
             save_n_prompt(notepad);
             break;
 
-        case 5:
+        case 6:
             handler.set_color('r');
             notepad.del_room();
             save_n_prompt(notepad);
             break;
 
-        case 6:
+        case 7:
             handler.set_color('g');
             notepad.add_contractor();
             save_n_prompt(notepad);
             break;
 
-        case 7:
+        case 8:
             handler.set_color('r');
             notepad.del_contractor();
             save_n_prompt(notepad);
             break;
 
-        case 8:
+        case 9:
+            handler.set_color('g');
+            notepad.change_cont();
+            save_n_prompt(notepad);
+            break;
+
+        case 10:
+            handler.set_color('r');
+            notepad.clear_closed();
+            save_n_prompt(notepad);
+            break;
+            
+        case 0:
 
         default:
             return;
