@@ -25,14 +25,17 @@ void Iohandler::menu()
     std::cout << "     -------------------------------------------------------------------\n";
     std::cout <<"                                    MENU\n";
     std::cout << "     -------------------------------------------------------------------\n\n";
-    std::cout<< "     1. Display tasks\n"
-        << "     2. Add a new task\n"
-        << "     3. Delete a task\n"
-        << "     4. Add a location\n"
-        << "     5. Delete a location\n"
-        << "     6. Add a contractor\n"
-        << "     7. Delete a contractor\n"
-        << "     8. Quit(t)\n\n"
+    std::cout << "     1. Display active tasks\n"
+        << "     2. Display closed tasks\n"
+        << "     3. Add a new task\n"
+        << "     4. Close a task\n"
+        << "     5. Add a location\n"
+        << "     6. Delete a location\n"
+        << "     7. Add a contractor\n"
+        << "     8. Delete a contractor\n"
+        << "     9. Change contractor for a task\n"
+        << "     10. Clear archive\n"
+        << "     0. Quit(t)\n\n"
         << "\tChoice: ";
 }
 
@@ -40,9 +43,9 @@ bool Iohandler::check(std::string choice, int& c)
 {
     std::istringstream ss{ choice };
     ss >> c;
-    if (c) //if failed, skip
+    if (c || c==0) //if failed, skip            number 0 is treated as false
     {
-        if (c >= 1 && c <= 8) return true;
+        if (c >= 0 && c <= 10) return true;
     }
 
     std::cout << "\tNo such option!\n\tEnter again: ";

@@ -29,7 +29,7 @@ void Room::add_task(std::string task, std::string cont)
 void Room::erase_task(int num)
 {
 	tasks.erase(tasks.begin() + num);
-	std::cout << "\n\tTask deleted successfully.\n";
+	std::cout << "\n\tTask closed successfully.\n";
 }
 
 std::vector<int> Room::get_locations(std::string temp)
@@ -41,3 +41,4 @@ std::vector<int> Room::get_locations(std::string temp)
 	}
 	return loc;		//returns locations in task vector of tasks to reassign
 }
+
