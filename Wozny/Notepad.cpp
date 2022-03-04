@@ -161,7 +161,7 @@ void Notepad::del_from_room()
     int task_num;
     int room_num;
 
-    select_task(msg1, msg2, msg3, task_num, room_num);
+    if (!select_task(msg1, msg2, msg3, task_num, room_num)) return;
 
     Task t = rooms.at(room_num).get_task_obj(task_num);
 
