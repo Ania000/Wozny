@@ -1,2 +1,2 @@
 # Wozny
-Woźny (nie)płaci, woźny wymaga
+Notepad/Organizer console app for a theoretical janitor
